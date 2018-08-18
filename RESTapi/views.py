@@ -39,7 +39,9 @@ def get_delete_update_company(request, pk):
 def get_post_companies(request):
     # get all companies
     if request.method == 'GET':
-        return Response({})
+        companies = Companies.objects.all()
+        serializer = CompaniesSerializer(companies, many=True)
+        return Response(serializer.data)
     # insert a new record for a company
     elif request.method == 'POST':
         return Response({})

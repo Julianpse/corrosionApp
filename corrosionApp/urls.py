@@ -23,7 +23,7 @@ urlpatterns = [
     url(r'^create_equipment/$', views.create_equipment, name='create_equipment'),
     url(r'^view_data/$', views.view_data, name='view_data'),
     url(r'^main_app/', include('main_app.urls')),
-    url(r'^api', include('RESTapi.urls')),
+    url(r'^api/', include('RESTapi.urls')),
     url(
         r'^api-auth/',
         include('rest_framework.urls', namespace='rest_framework')
