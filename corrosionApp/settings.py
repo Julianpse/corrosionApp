@@ -27,7 +27,7 @@ SECRET_KEY = '87wklm$h@(rr=6&(_%6ha8@^@6wc5ahds@q&z7h48adn1#g-jy'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['corrosion-software.herokuapp.com']
 
 
 # Application definition
