@@ -7,7 +7,6 @@ name = "pypi"
 django = "*"
 djangorestframework = "*"
 "psycopg2" = "*"
-"django-select2" = "*"
 django-filter = "*"
 gunicorn = "*"
 

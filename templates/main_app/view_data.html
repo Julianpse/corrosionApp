@@ -6,7 +6,12 @@
     <form action="" method='POST'>
      {% csrf_token %}
      <label for="equipment">Equipment</label>
-     <input type="equipment">
+     <select name ="equipment" id="selected-equipment">
+       <option value="" selected disabled hidden>Select Equipment</option>
+       {% for i in equipment_name %}
+       <option value="{{i}}">{{i}}</option>
+       {% endfor %}
+     </select>
     </form>
   </div>
   <div class="container">
@@ -14,7 +19,18 @@
      <div id="psiGraph" style="width:90%;height:400px;"></div>
   </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>
+
+
+
+$('select').on('change', function (e) {
+    var optionSelected = $("#selected-equipment").children("option").filter(":selected").text()
+    console.log(optionSelected);
+});
+
+</script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 {% load static %}
-    <script src="{% static "main_app/js/pressureGraph.js" %}"></script>
+<script src="{% static "main_app/js/pressureGraph.js" %}"></script>
 {% endblock %}
