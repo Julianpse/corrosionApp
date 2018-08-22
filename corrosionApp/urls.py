@@ -15,9 +15,16 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.conf.urls import include
+from main_app import views
 
 urlpatterns = [
-    url(r'^', include('RESTapi.urls')),
+    url(r'^$', views.home, name = 'home'),
+    url(r'^tech/$', views.tech, name='tech'),
+    url(r'^create_equipment/$', views.create_equipment, name='create_equipment'),
+    url(r'^view_data/$', views.view_data, name='view_data'),
+    url(r'^main_app/', include('main_app.urls')),
+    url(r'^api', include('RESTapi.urls')),
     url(
         r'^api-auth/',
         include('rest_framework.urls', namespace='rest_framework')

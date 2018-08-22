@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+  <div class="jumbotron">
+    <h1>Your Data</h1>
+    <form action="" method='POST'>
+     {% csrf_token %}{{ form.as_p }}
+    </form>
+  </div>
+  <div class="container">
+     <h1 style ="color: black">Corrosion Rate</h1>
+     <div id="psiGraph" style="width:90%;height:400px;"></div>
+  </div>
+</div>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+{% load static %}
+    <script src="{% static "main_app/js/pressureGraph.js" %}"></script>
+{% endblock %}
