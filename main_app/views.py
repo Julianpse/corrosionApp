@@ -9,6 +9,10 @@ from main_app.forms import ViewEquipmentData
 
 
 # Create your views here.
+def home(request):
+    args = {}
+    return render(request,'main_app/home.html', args)
+
 def tech(request):
     args = {'form':TechForm}
     return render(request,'main_app/tech.html',args)
