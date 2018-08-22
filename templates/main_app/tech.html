@@ -3,8 +3,36 @@
 <div class="container">
   <div class="jumbotron">
     <h1>Enter Readings</h1>
-    <form action="" method='POST'>
-      {% csrf_token %} {{ form.as_p }}
+    <form name= "enter_readings"action="/tech" method='POST'>
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="facility">Facility</label>
+        <select name ="facility">
+          {% for i in facility %}
+          <option value="{{i}}">{{i}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="equipment">Equipment</label>
+        <select name ="equipment">
+          {% for i in equipment_name %}
+          <option value="{{i}}">{{i}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="tml">TML</label>
+        <select name ="tml">
+          {% for i in tml %}
+          <option value="{{i}}">{{i}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="reading">Reading (mils)</label>
+        <input type="number" step=".01">
+      </div>
       <button class="btn btn-primary" type="submit">Submit Data</button>
     </form>
   </div>
