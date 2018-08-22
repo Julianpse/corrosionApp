@@ -12,5 +12,65 @@ urlpatterns = [
         r'^api/v1/companies/$',
         views.get_post_companies,
         name='get_post_companies'
+    ),
+    url(
+        r'^api/v1/basin/(?P<pk>[0-9]+)$',
+        views.get_delete_update_basin,
+        name='get_delete_update_basin'
+    ),
+    url(
+        r'^api/v1/basin/$',
+        views.get_post_basins,
+        name='get_post_basins'
+    ),
+    url(
+        r'^api/v1/facility/(?P<pk>[0-9]+)$',
+        views.get_delete_update_facility,
+        name='get_delete_update_facility'
+    ),
+    url(
+        r'^api/v1/facility/$',
+        views.get_post_facilities,
+        name='get_post_facilities'
+    ),
+    url(
+        r'^api/v1/fixed_equipment/(?P<pk>[0-9]+)$',
+        views.get_delete_update_fixed_eqp,
+        name='get_delete_update_fixed_eqp'
+    ),
+    url(
+        r'^api/v1/fixed_equipment/$',
+        views.get_post_fixed_eqps,
+        name='get_post_fixed_eqps'
+    ),
+    url(
+        r'^api/v1/tml/(?P<pk>[0-9]+)$',
+        views.get_delete_update_tml,
+        name='get_delete_update_tml'
+    ),
+    url(
+        r'^api/v1/tml/$',
+        views.get_post_tmls,
+        name='get_post_tmls'
+    ),
+    url(
+        r'^api/v1/measurements/(?P<pk>[0-9]+)$',
+        views.get_delete_update_measurement,
+        name='get_delete_update_measurement'
+    ),
+    url(
+        r'^api/v1/measurements/$',
+        views.get_post_measurements,
+        name='get_post_measurements'
+    ),
+    url(
+        r'^api/v1/users/(?P<pk>[0-9]+)$',
+        views.get_delete_update_user,
+        name='get_delete_update_user'
+    ),
+    url(
+        r'^api/v1/users/$',
+        views.get_post_users,
+        name='get_post_users'
     )
 ]

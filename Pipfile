@@ -7,7 +7,12 @@ name = "pypi"
 django = "*"
 djangorestframework = "*"
 "psycopg2" = "*"
+<<<<<<< HEAD
 "django-select2" = "*"
+=======
+django-filter = "*"
+gunicorn = "*"
+>>>>>>> fe74995b31a23d2f5ad8badc3dd929160aa2485e
 
 [dev-packages]
 
