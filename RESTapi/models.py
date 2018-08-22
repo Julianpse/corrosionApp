@@ -147,6 +147,9 @@ class Facility(models.Model):
     facility_name = models.CharField(max_length=100, blank=True, null=True)
     basin = models.ForeignKey(Basin, models.DO_NOTHING, blank=True, null=True)
 
+    def __str__(self):
+        return self.facility_name
+
     class Meta:
         managed = False
         db_table = 'facility'
@@ -172,6 +175,9 @@ class FixedEquipment(models.Model):
     weld_joint_red_factor = models.FloatField(blank=True, null=True)
     y_coefficient = models.FloatField(blank=True, null=True)
 
+    def __str__(self):
+        return self.equipment_name
+
     class Meta:
         managed = False
         db_table = 'fixed_equipment'
@@ -188,9 +194,13 @@ class Measurements(models.Model):
         db_table = 'measurements'
 
 
+
 class TmlInfo(models.Model):
     tml_name = models.CharField(max_length=100, blank=True, null=True)
     fixed_eqp = models.ForeignKey(FixedEquipment, models.DO_NOTHING, blank=True, null=True)
+
+    def __str__(self):
+        return self.tml_name
 
     class Meta:
         managed = False

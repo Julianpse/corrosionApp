@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'main_app',
     'RESTapi',
     'rest_framework',
+    'django_select2'
 ]
 
 MIDDLEWARE = [
