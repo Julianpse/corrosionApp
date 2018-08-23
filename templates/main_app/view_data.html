@@ -35,6 +35,7 @@
   <div class="container">
     <h1 style="color: black">Corrosion Rate</h1>
     <div id="psiGraph" style="width:90%;height:400px;"></div>
+    <div id="corrosionGraph" style="width:90%;height:400px;"></div>
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -103,8 +104,45 @@
         .then(axios.spread((measurementRes,fixedRes) => {
           measData = measurementRes.data
           fixedData = fixedRes.data
-          console.log(measData)
-          console.log(fixedData)
+          measArray = []
+          tsArray = []
+          measures = measData.forEach(function(element){
+            measArray.push(element.measurement)
+            tsArray.push(element.insert_timestamp)
+          })
+          corrosionGraph = document.getElementById('corrosionGraph')
+          var trace1 = {
+            x: tsArray,
+            y:measArray,
+            type: 'scatter',
+            mode: 'lines+markers'
+          }
+
+          var layout = {
+              title: 'TML Corrosion Rate',
+              yaxis: {
+                rangemode:'tozero'
+
+              }
+              //,
+              // shapes: [
+              //   {
+              //   type: 'line',
+              //   x0: tsArray[0],
+              //   y0: fixedData.min_req_thickness,
+              //   x1: tsArray[tsArray.length-1],
+              //   y1: fixedData.min_req_thickness,
+              //   line: {
+              //     color: 'red',
+              //     width: 4
+              //   }
+              //   }]
+              }
+              var dataForChart = [trace1]
+              Plotly.newPlot(corrosionGraph, dataForChart, layout)
+          console.log(measArray)
+          console.log(tsArray)
+          console.log(fixedData.min_req_thickness)
         }
       ))
       })
