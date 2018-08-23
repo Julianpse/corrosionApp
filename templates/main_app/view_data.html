@@ -49,7 +49,6 @@
     let tmlData = null;
 
     $('#selected-facility').on('change', function(e) {
-      // var optionSelected = $("#selected-facility").children("option").filter(":selected").text()
       let optionSelected = $("#selected-facility").val()
       console.log(optionSelected);
       axios.get(`http://localhost:8000/api/api/v1/facility/${optionSelected}`).then((response) => {
