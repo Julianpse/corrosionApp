@@ -1,49 +1,50 @@
-{% extends "base.html" %}
-{% block body %}
+{% extends "base.html" %} {% block body %}
 <div class="container">
   <div class="jumbotron">
-    <h1>Your Data</h1>
+    <h1>Select TML</h1>
     <form action="" method='POST'>
-     {% csrf_token %}
-     <!-- <label for="facility">Facility</label>
-     <select name ="facility" id="selected-facility">
-       <option value="" selected disabled hidden>Select Equipment</option>
-       {% for i in equipment_name %}
-       <option value="{{i}}">{{i}}</option>
-       {% endfor %}
-     </select>
-      <label for="equipment">Equipment</label>
-     <select name ="equipment" id="selected-equipment">
-       <option value="" selected disabled hidden>Select Equipment</option>
-       {% for i in equipment_name %}
-       <option value="{{i}}">{{i}}</option>
-       {% endfor %}
-     </select> -->
-     <label for="tml">TML</label>
-     <select name ="tml" id="selected-tml">
-       <option value="" selected disabled hidden>Select TML</option>
-       {% for i in tml%}
-       <option value="{{i}}">{{i}}</option>
-       {% endfor %}
-     </select>
+      {% csrf_token %}
+      <div class="form-item">
+        <label for="facility">Facility</label>
+        <select name="facility" id="selected-facility">
+           <option value="" selected disabled hidden>Select Facility</option>
+           {% for i in facility %}
+           <option value="{{i.id}}">{{i}}</option>
+           {% endfor %}
+         </select>
+      </div>
+      <div class="form-item">
+        <label for="equipment">Equipment</label>
+        <select name="equipment" id="selected-equipment">
+           <option value="" selected disabled hidden>Select Equipment</option>
+           {% for i in equipment_name %}
+           <option value="{{i.id}}">{{i}}</option>
+           {% endfor %}
+         </select>
+      </div>
+      <div class="form-item">
+        <label for="tml">TML</label>
+        <select name="tml" id="selected-tml">
+           <option value="" selected disabled hidden>Select TML</option>
+           {% for i in tml%}
+           <option value="{{i.id}}">{{i.id}}</option>
+           {% endfor %}
+       </select>
+     </div>
     </form>
   </div>
   <div class="container">
-     <h1 style ="color: black">Corrosion Rate</h1>
-     <div id="psiGraph" style="width:90%;height:400px;"></div>
+    <h1 style="color: black">Corrosion Rate</h1>
+    <div id="psiGraph" style="width:90%;height:400px;"></div>
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script>
-
-
-
-$('select').on('change', function (e) {
-    var optionSelected = $("#selected-tml").children("option").filter(":selected").text()
+  $('select').on('change', function(e) {
+    // var optionSelected = $("#selected-facility").children("option").filter(":selected").text()
+    var optionSelected = $("#selected-facility").val()
     console.log(optionSelected);
-    console.log(typeof(optionSelected));
-});
-
+  });
 </script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 {% load static %}
