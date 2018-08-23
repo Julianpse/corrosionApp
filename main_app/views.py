@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.views.generic import TemplateView
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.http import HttpResponse
 from RESTapi.models import FixedEquipment, Facility, Measurements, TmlInfo
 
@@ -44,3 +44,4 @@ def view_data(request):
     equipment_name = FixedEquipment.objects.all()
     args = {'equipment_name': equipment_name, 'facility': facility, 'tml':tml}
     return render(request, 'main_app/view_data.html',args)
+
