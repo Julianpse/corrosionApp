@@ -126,10 +126,12 @@
             x: tsArray,
             y:measArray,
             type: 'scatter',
-            mode: 'lines+markers'
+            mode: 'lines+markers',
+            name: 'Readings(mils)'
           }
 
           var layout = {
+              showlegend: true,
               title: 'TML Corrosion Rate',
               yaxis: {
                 rangemode:'tozero'
