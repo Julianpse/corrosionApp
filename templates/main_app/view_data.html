@@ -64,7 +64,7 @@
           shownEquipment = response.data
 
           for(var i = 0; i<shownEquipment.length; i++){
-            $('<option/>').val(shownEquipment[i]).html(shownEquipment[i].equipment_name).appendTo('#selected-equipment');
+            $('<option/>').val(shownEquipment[i].id).html(shownEquipment[i].equipment_name).appendTo('#selected-equipment');
           }
         });
       })
@@ -76,7 +76,7 @@
 
 // Handles the Equipment dropdown menu
     $('#selected-equipment').on('change', function(e) {
-      let optionSelected = 1
+      let optionSelected = $('#selected-equipment').val();
 
     // Gets the Equipment Data for the facility specified above
       axios.get(`http://localhost:8000/api/api/v1/fixed_equipment/${optionSelected}`).then((response) => {
@@ -100,7 +100,8 @@
 
 //Handles the TML dropdown menu and all of the resulting charts
     $('#selected-tml').on('change', function(e) {
-      let optionSelected = $("#selected-tml").children()[3].value // FIXME:THIS NEEDS TO GET FIXED -- Need to loop through the array of that... It's currently at index 3
+      let optionSelected = $("#selected-tml").val();
+      // let optionSelected = $("#selected-tml").children()[3].value // FIXME:THIS NEEDS TO GET FIXED -- Need to loop through the array of that... It's currently at index 3
       console.log(optionSelected);
       axios.get(`http://localhost:8000/api/api/v1/tml/${optionSelected}`).then((response) => {
         tmlData = response.data
