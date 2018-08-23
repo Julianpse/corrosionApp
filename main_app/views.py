@@ -28,8 +28,6 @@ def tech(request):
     equipment_name = FixedEquipment.objects.all()
     facility = Facility.objects.all()
     tml = TmlInfo.objects.all()
-    for tml in tml:
-        tmlDict = dict({tml.id : tml})
 
     args = {'equipment_name': equipment_name, 'facility':facility, 'tml':tml}
     return render(request,'main_app/tech.html',args)
@@ -44,4 +42,3 @@ def view_data(request):
     equipment_name = FixedEquipment.objects.all()
     args = {'equipment_name': equipment_name, 'facility': facility, 'tml':tml}
     return render(request, 'main_app/view_data.html',args)
-

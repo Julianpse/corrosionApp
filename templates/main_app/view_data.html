@@ -82,18 +82,11 @@
       axios.get(`http://localhost:8000/api/api/v1/fixed_equipment/${optionSelected}`).then((response) => {
         equipmentData = response.data.id
 
-        // let $dropdown = $("#selected-tml");
-        //
-        // $.each(result, function() {
-        //     $dropdown.append($("<option />").val(tmlData).text(this.Name));
-        // });
-
       //Filters the list of TML data based on Equipment
         axios.get(`http://localhost:8000/api/api/v1/tml/?fixed_eqp=${equipmentData}`).then((response) => {
           $('#selected-tml').empty()
           shownTml = null;
           shownTml = response.data;
-          console.log(shownTml);
 
           for(var i = 0; i<shownTml.length; i++){
             $('<option/>').val(shownTml[i].id).html(shownTml[i].tml_name).appendTo('#selected-tml');
@@ -107,7 +100,7 @@
 
 //Handles the TML dropdown menu and all of the resulting charts
     $('#selected-tml').on('change', function(e) {
-      let optionSelected = $("#selected-tml").children()[3].value //// FIXME:THIS NEEDS TO GET FIXED -- Need to loop through the array of that
+      let optionSelected = $("#selected-tml").children()[3].value // FIXME:THIS NEEDS TO GET FIXED -- Need to loop through the array of that... It's currently at index 3
       console.log(optionSelected);
       axios.get(`http://localhost:8000/api/api/v1/tml/${optionSelected}`).then((response) => {
         tmlData = response.data
