@@ -15,11 +15,15 @@
       </div>
       <div class="form-item">
         <label for="equipment">Equipment</label>
-        <select name="equipment" id="selected-equipment">
+        <!-- <select name="equipment" id="selected-equipment">
            <option value="" selected disabled hidden>Select Equipment</option>
            {% for i in equipment_name %}
            <option value="{{i.id}}">{{i}}</option>
            {% endfor %}
+         </select> -->
+         <select name="equipment" id="selected-equipment">
+           <option value="" selected disabled hidden>Select Equipment</option>
+
          </select>
       </div>
       <div class="form-item">
@@ -47,13 +51,24 @@
     let facilityData = null;
     let equipmentData = null;
     let tmlData = null;
+    let shownEquipment = null;
 
     $('#selected-facility').on('change', function(e) {
       let optionSelected = $("#selected-facility").val()
       console.log(optionSelected);
       axios.get(`http://localhost:8000/api/api/v1/facility/${optionSelected}`).then((response) => {
-        facilityData = response.data
+        facilityData = response.data.id
         console.log(facilityData)
+
+        axios.get(`http://localhost:8000/api/api/v1/fixed_equipment/?facility=${facilityData}`).then((response) => {
+          $('#selected-equipment').empty()
+          shownEquipment = null;
+          shownEquipment = response.data
+          console.log(shownEquipment)
+          for(var i = 0; i<shownEquipment.length; i++){
+            $('<option/>').val(shownEquipment[i]).html(shownEquipment[i].equipment_name).appendTo('#selected-equipment');
+          }
+        });
       })
       .catch(error => {
       console.log(error.response)
@@ -66,6 +81,12 @@
       axios.get(`http://localhost:8000/api/api/v1/fixed_equipment/${optionSelected}`).then((response) => {
         equipmentData = response.data
         console.log(equipmentData)
+        let $dropdown = $("#selectedEquipment");
+
+        $.each(result, function() {
+            $dropdown.append($("<option />").val(equipmentData).text(this.Name));
+        });
+
       })
       .catch(error => {
       console.log(error.response)
