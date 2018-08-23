@@ -98,7 +98,20 @@
       console.log(optionSelected);
       axios.get(`http://localhost:8000/api/api/v1/tml/${optionSelected}`).then((response) => {
         tmlData = response.data
+        fixed_equip = tmlData.fixed_eqp
         console.log(tmlData)
+        console.log(fixed_equip)
+        return axios.all([
+          axios.get(`http://localhost:8000/api/api/v1/measurements/?tml=${optionSelected}`),
+          axios.get(`http://localhost:8000/api/api/v1/fixed_equipment/${fixed_equip}`)
+        ])
+        .then(axios.spread((measurementRes,fixedRes) => {
+          measData = measurementRes.data
+          fixedData = fixedRes.data
+          console.log(measData)
+          console.log(fixedData)
+        }
+      ))
       })
       .catch(error => {
       console.log(error.response)
