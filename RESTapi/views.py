@@ -159,6 +159,9 @@ def get_post_fixed_eqps(request):
     # get all companies
     if request.method == 'GET':
         fixed_eqps = FixedEquipment.objects.all()
+        facility = request.GET.get('facility', None)
+        if facility:
+            fixed_eqps = fixed_eqps.filter(facility=facility)
         serializer = FixedEquipmentSerializer(fixed_eqps, many=True)
         return Response(serializer.data)
     # insert a new record for a company
@@ -194,6 +197,9 @@ def get_post_tmls(request):
     # get all companies
     if request.method == 'GET':
         tmls = TmlInfo.objects.all()
+        fixed_eqp = request.GET.get('fixed_eqp', None)
+        if fixed_eqp:
+            tmls = tmls.filter(fixed_eqp=fixed_eqp)
         serializer = TMLinfoSerializer(tmls, many=True)
         return Response(serializer.data)
     # insert a new record for a company
