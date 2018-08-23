@@ -42,42 +42,51 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
 
-  $('#selected-facility').on('change', function(e) {
-    // var optionSelected = $("#selected-facility").children("option").filter(":selected").text()
-    let optionSelected = $("#selected-facility").val()
-    console.log(optionSelected);
-    axios.get(`http://localhost:8000/api/api/v1/facility/${optionSelected}`).then((response) => {
-      let data = response.data
-      console.log(data)
-    })
-    .catch(error => {
-    console.log(error.response)
+  $( document ).ready(function() {
+
+    let facilityData = null;
+    let equipmentData = null;
+    let tmlData = null;
+
+    $('#selected-facility').on('change', function(e) {
+      // var optionSelected = $("#selected-facility").children("option").filter(":selected").text()
+      let optionSelected = $("#selected-facility").val()
+      console.log(optionSelected);
+      axios.get(`http://localhost:8000/api/api/v1/facility/${optionSelected}`).then((response) => {
+        facilityData = response.data
+        console.log(facilityData)
+      })
+      .catch(error => {
+      console.log(error.response)
+      });
+    });
+
+    $('#selected-equipment').on('change', function(e) {
+      let optionSelected = $("#selected-equipment").val()
+      console.log(optionSelected);
+      axios.get(`http://localhost:8000/api/api/v1/fixed_equipment/${optionSelected}`).then((response) => {
+        equipmentData = response.data
+        console.log(equipmentData)
+      })
+      .catch(error => {
+      console.log(error.response)
+      });
+    });
+
+    $('#selected-tml').on('change', function(e) {
+      let optionSelected = $("#selected-tml").val()
+      console.log(optionSelected);
+      axios.get(`http://localhost:8000/api/api/v1/tml/${optionSelected}`).then((response) => {
+        tmlData = response.data
+        console.log(tmlData)
+      })
+      .catch(error => {
+      console.log(error.response)
+      });
     });
   });
 
-  $('#selected-equipment').on('change', function(e) {
-    let optionSelected = $("#selected-equipment").val()
-    console.log(optionSelected);
-    axios.get(`http://localhost:8000/api/api/v1/fixed_equipment/${optionSelected}`).then((response) => {
-      let data = response.data
-      console.log(data)
-    })
-    .catch(error => {
-    console.log(error.response)
-    });
-  });
 
-  $('#selected-tml').on('change', function(e) {
-    let optionSelected = $("#selected-tml").val()
-    console.log(optionSelected);
-    axios.get(`http://localhost:8000/api/api/v1/tml/${optionSelected}`).then((response) => {
-      let data = response.data
-      console.log(data)
-    })
-    .catch(error => {
-    console.log(error.response)
-    });
-  });
 
   //`https://corrosion-software.herokuapp.com/api/api/v1/fixed_equipment/${optionSelected}`
 </script>
