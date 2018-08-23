@@ -5,10 +5,24 @@
     <h1>Your Data</h1>
     <form action="" method='POST'>
      {% csrf_token %}
-     <label for="equipment">Equipment</label>
+     <!-- <label for="facility">Facility</label>
+     <select name ="facility" id="selected-facility">
+       <option value="" selected disabled hidden>Select Equipment</option>
+       {% for i in equipment_name %}
+       <option value="{{i}}">{{i}}</option>
+       {% endfor %}
+     </select>
+      <label for="equipment">Equipment</label>
      <select name ="equipment" id="selected-equipment">
        <option value="" selected disabled hidden>Select Equipment</option>
        {% for i in equipment_name %}
+       <option value="{{i}}">{{i}}</option>
+       {% endfor %}
+     </select> -->
+     <label for="tml">TML</label>
+     <select name ="tml" id="selected-tml">
+       <option value="" selected disabled hidden>Select TML</option>
+       {% for i in tml%}
        <option value="{{i}}">{{i}}</option>
        {% endfor %}
      </select>
@@ -25,7 +39,7 @@
 
 
 $('select').on('change', function (e) {
-    var optionSelected = $("#selected-equipment").children("option").filter(":selected").text()
+    var optionSelected = $("#selected-tml").children("option").filter(":selected").text()
     console.log(optionSelected);
 });
 

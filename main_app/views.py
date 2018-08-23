@@ -37,6 +37,8 @@ def create_equipment(request):
     return render(request, 'main_app/create_equipment.html',args)
 
 def view_data(request):
+    facility = Facility.objects.all()
+    tml = TmlInfo.objects.all()
     equipment_name = FixedEquipment.objects.all()
-    args = {'equipment_name': equipment_name}
+    args = {'equipment_name': equipment_name, 'facility': facility, 'tml':tml}
     return render(request, 'main_app/view_data.html',args)

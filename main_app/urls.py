@@ -7,5 +7,4 @@ urlpatterns = [
     url(r'^tech$', views.tech, name = 'tech'),
     url(r'^create_equipment$', views.create_equipment),
     url(r'^view_data$', views.view_data),
-    url(r'^select2/', include('django_select2.urls')),
 ]
