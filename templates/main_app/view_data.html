@@ -15,20 +15,19 @@
       </div>
       <div class="form-item">
         <label for="equipment">Equipment</label>
-          <!--jQuery populates the dropdown selections below -->
          <select name="equipment" id="selected-equipment">
            <option value="" selected disabled hidden>Select Equipment</option>
-
+            <!--jQuery populates the dropdown selections below -->
          </select>
       </div>
       <div class="form-item">
         <label for="tml">TML</label>
-        <select name="tml" id="selected-tml">
-           <option value="" selected disabled hidden>Select TML</option>
-           {% for i in tml%}
+          <select name="tml" id="selected-tml">
+             <option value="" selected disabled hidden>Select TML</option>
+           <!-- {% for i in tml%}
            <option value="{{i.id}}">{{i.id}}</option>
-           {% endfor %}
-       </select>
+           {% endfor %} -->
+         </select>
      </div>
     </form>
   </div>
@@ -48,19 +47,22 @@
     let equipmentData = null;
     let tmlData = null;
     let shownEquipment = null;
+    let shownTml = null;
 
+// Handles the Facility Drop Down Menu
     $('#selected-facility').on('change', function(e) {
       let optionSelected = $("#selected-facility").val()
-      console.log(optionSelected);
+
+      //Gets the list of the Facilities from the API
       axios.get(`http://localhost:8000/api/api/v1/facility/${optionSelected}`).then((response) => {
         facilityData = response.data.id
-        console.log(facilityData)
 
+      //Filters the Equipment based on the facility
         axios.get(`http://localhost:8000/api/api/v1/fixed_equipment/?facility=${facilityData}`).then((response) => {
           $('#selected-equipment').empty()
           shownEquipment = null;
           shownEquipment = response.data
-          console.log(shownEquipment)
+
           for(var i = 0; i<shownEquipment.length; i++){
             $('<option/>').val(shownEquipment[i]).html(shownEquipment[i].equipment_name).appendTo('#selected-equipment');
           }
@@ -71,32 +73,53 @@
       });
     });
 
+
+// Handles the Equipment dropdown menu
     $('#selected-equipment').on('change', function(e) {
-      let optionSelected = $("#selected-equipment").val()
-      console.log(optionSelected);
+      let optionSelected = 1
+
+    // Gets the Equipment Data for the facility specified above
       axios.get(`http://localhost:8000/api/api/v1/fixed_equipment/${optionSelected}`).then((response) => {
-        equipmentData = response.data
-        console.log(equipmentData)
-        let $dropdown = $("#selectedEquipment");
+        equipmentData = response.data.id
 
-        $.each(result, function() {
-            $dropdown.append($("<option />").val(equipmentData).text(this.Name));
+        // let $dropdown = $("#selected-tml");
+        //
+        // $.each(result, function() {
+        //     $dropdown.append($("<option />").val(tmlData).text(this.Name));
+        // });
+
+      //Filters the list of TML data based on Equipment
+        axios.get(`http://localhost:8000/api/api/v1/tml/?fixed_eqp=${equipmentData}`).then((response) => {
+          $('#selected-tml').empty()
+          shownTml = null;
+          shownTml = response.data;
+          console.log(shownTml);
+
+          for(var i = 0; i<shownTml.length; i++){
+            $('<option/>').val(shownTml[i].id).html(shownTml[i].tml_name).appendTo('#selected-tml');
+          }
         });
-
       })
       .catch(error => {
       console.log(error.response)
       });
     });
 
+//Handles the TML dropdown menu and all of the resulting charts
     $('#selected-tml').on('change', function(e) {
-      let optionSelected = $("#selected-tml").val()
+      let optionSelected = $("#selected-tml").children()[3].value //// FIXME:THIS NEEDS TO GET FIXED -- Need to loop through the array of that
       console.log(optionSelected);
       axios.get(`http://localhost:8000/api/api/v1/tml/${optionSelected}`).then((response) => {
         tmlData = response.data
         fixed_equip = tmlData.fixed_eqp
-        console.log(tmlData)
-        console.log(fixed_equip)
+
+        let $dropdown = $("#selectedTml");
+
+        $.each(result, function() {
+            $dropdown.append($("<option />").val(equipmentData).text(this.Name));
+        });
+
+    //Retreives and parses data for the charts
         return axios.all([
           axios.get(`http://localhost:8000/api/api/v1/measurements/?tml=${optionSelected}`),
           axios.get(`http://localhost:8000/api/api/v1/fixed_equipment/${fixed_equip}`)
@@ -140,10 +163,6 @@
               }
               var dataForChart = [trace1]
               Plotly.newPlot(corrosionGraph, dataForChart, layout)
-          console.log(measArray)
-          console.log(tsArray[0])
-          console.log(tsArray[tsArray.length-1])
-          console.log(fixedData.min_req_thickness)
         }
       ))
       })
