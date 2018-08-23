@@ -50,6 +50,9 @@
       let data = response.data
       console.log(data)
     })
+    .catch(error => {
+    console.log(error.response)
+    });
   });
 
   //`https://corrosion-software.herokuapp.com/api/api/v1/fixed_equipment/${optionSelected}`
