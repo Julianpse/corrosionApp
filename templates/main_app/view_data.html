@@ -113,12 +113,6 @@
         tmlData = response.data
         fixed_equip = tmlData.fixed_eqp
 
-        let $dropdown = $("#selectedTml");
-
-        $.each(result, function() {
-            $dropdown.append($("<option />").val(equipmentData).text(this.Name));
-        });
-
     //Retreives and parses data for the charts
         return axios.all([
           axios.get(`http://localhost:8000/api/api/v1/measurements/?tml=${optionSelected}`),
