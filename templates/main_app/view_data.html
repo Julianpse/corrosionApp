@@ -38,13 +38,21 @@
     <div id="psiGraph" style="width:90%;height:400px;"></div>
   </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
   $('select').on('change', function(e) {
     // var optionSelected = $("#selected-facility").children("option").filter(":selected").text()
     var optionSelected = $("#selected-facility").val()
     console.log(optionSelected);
+    axios.get(`https://corrosion-software.herokuapp.com/api/api/v1/fixed_equipment/${optionSelected}`).then((response) => {
+      let data = response.data
+      console.log(data)
+    })
+
   });
+
+  //`https://corrosion-software.herokuapp.com/api/api/v1/fixed_equipment/${optionSelected}`
 </script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 {% load static %}
