@@ -34,7 +34,7 @@
   </div>
   <div class="container">
     <h1 style="color: black">Corrosion Rate</h1>
-    <div id="psiGraph" style="width:90%;height:400px;"></div>
+    <!-- <div id="psiGraph" style="width:90%;height:400px;"></div> -->
     <div id="corrosionGraph" style="width:90%;height:400px;"></div>
   </div>
 </div>
@@ -124,24 +124,25 @@
                 rangemode:'tozero'
 
               }
-              //,
-              // shapes: [
-              //   {
-              //   type: 'line',
-              //   x0: tsArray[0],
-              //   y0: fixedData.min_req_thickness,
-              //   x1: tsArray[tsArray.length-1],
-              //   y1: fixedData.min_req_thickness,
-              //   line: {
-              //     color: 'red',
-              //     width: 4
-              //   }
-              //   }]
+              ,
+              shapes: [
+                {
+                type: 'line',
+                x0: tsArray[0],
+                y0: fixedData.min_req_thickness,
+                x1: tsArray[tsArray.length-1],
+                y1: fixedData.min_req_thickness,
+                line: {
+                  color: 'red',
+                  width: 4
+                }
+                }]
               }
               var dataForChart = [trace1]
               Plotly.newPlot(corrosionGraph, dataForChart, layout)
           console.log(measArray)
-          console.log(tsArray)
+          console.log(tsArray[0])
+          console.log(tsArray[tsArray.length-1])
           console.log(fixedData.min_req_thickness)
         }
       ))
@@ -158,5 +159,5 @@
 </script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 {% load static %}
-<script src="{% static "main_app/js/pressureGraph.js" %}"></script>
+<!-- <script src="{% static "main_app/js/pressureGraph.js" %}"></script> -->
 {% endblock %}
