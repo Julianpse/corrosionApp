@@ -54,11 +54,11 @@
       let optionSelected = $("#selected-facility").val()
 
       //Gets the list of the Facilities from the API
-      axios.get(`http://localhost:8000/api/api/v1/facility/${optionSelected}`).then((response) => {
+      axios.get(`https://corrosion-software.herokuapp.com/api/api/v1/facility/${optionSelected}`).then((response) => {
         facilityData = response.data.id
 
       //Filters the Equipment based on the facility
-        axios.get(`http://localhost:8000/api/api/v1/fixed_equipment/?facility=${facilityData}`).then((response) => {
+        axios.get(`https://corrosion-software.herokuapp.com/api/api/v1/fixed_equipment/?facility=${facilityData}`).then((response) => {
           $('#selected-equipment').empty()
           shownEquipment = null;
           shownEquipment = response.data
@@ -79,11 +79,11 @@
       let optionSelected = $('#selected-equipment').val();
 
     // Gets the Equipment Data for the facility specified above
-      axios.get(`http://localhost:8000/api/api/v1/fixed_equipment/${optionSelected}`).then((response) => {
+      axios.get(`https://corrosion-software.herokuapp.com/api/api/v1/fixed_equipment/${optionSelected}`).then((response) => {
         equipmentData = response.data.id
 
       //Filters the list of TML data based on Equipment
-        axios.get(`http://localhost:8000/api/api/v1/tml/?fixed_eqp=${equipmentData}`).then((response) => {
+        axios.get(`https://corrosion-software.herokuapp.com/api/api/v1/tml/?fixed_eqp=${equipmentData}`).then((response) => {
           $('#selected-tml').empty()
           shownTml = null;
           shownTml = response.data;
@@ -103,14 +103,14 @@
       let optionSelected = $("#selected-tml").val();
       // let optionSelected = $("#selected-tml").children()[3].value // FIXME:THIS NEEDS TO GET FIXED -- Need to loop through the array of that... It's currently at index 3
       console.log(optionSelected);
-      axios.get(`http://localhost:8000/api/api/v1/tml/${optionSelected}`).then((response) => {
+      axios.get(`https://corrosion-software.herokuapp.com/api/api/v1/tml/${optionSelected}`).then((response) => {
         tmlData = response.data
         fixed_equip = tmlData.fixed_eqp
 
     //Retreives and parses data for the charts
         return axios.all([
-          axios.get(`http://localhost:8000/api/api/v1/measurements/?tml=${optionSelected}`),
-          axios.get(`http://localhost:8000/api/api/v1/fixed_equipment/${fixed_equip}`)
+          axios.get(`https://corrosion-software.herokuapp.com/api/api/v1/measurements/?tml=${optionSelected}`),
+          axios.get(`https://corrosion-software.herokuapp.com/api/api/v1/fixed_equipment/${fixed_equip}`)
         ])
         .then(axios.spread((measurementRes,fixedRes) => {
           measData = measurementRes.data
